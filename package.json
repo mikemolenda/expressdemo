@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/mikemolenda/expressdemo/issues"
   },
-  "homepage": "https://github.com/mikemolenda/expressdemo#readme"
+  "homepage": "https://github.com/mikemolenda/expressdemo#readme",
+  "dependencies": {
+    "body-parser": "1.17.2",
+    "express": "4.15.3",
+    "jade": "1.11.0",
+    "nodemailer": "4.0.1"
+  }
 }
