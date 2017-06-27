@@ -18,6 +18,9 @@ app.set('view engine', 'pug');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
+// Set static path (HTML site root)
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Respond to GET requests
 app.get('/', (req, res) => {
     console.log('GET /');
