@@ -21,10 +21,16 @@ app.use(bodyParser.urlencoded({extended: false}));
 // Set static path (HTML site root)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Respond to GET requests
+// Respond to GET requests for root
 app.get('/', (req, res) => {
     console.log('GET /');
-    res.render('index');
+    res.render('index', {title: 'Welcome'});    // Pass parameters as second argument object
+});
+
+// Respond to GET requests for about
+app.get('/about', (req, res) => {
+    console.log('GET /about');
+    res.render('about', {title: 'About'});
 });
 
 app.listen(port);
