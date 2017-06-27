@@ -21,6 +21,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 // Set static path (HTML site root)
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Routing:
+
 // Respond to GET requests for root
 app.get('/', (req, res) => {
     console.log('GET /');
@@ -32,6 +34,22 @@ app.get('/about', (req, res) => {
     console.log('GET /about');
     res.render('about', {title: 'About'});
 });
+
+// Respond to GET requests for contact
+app.get('/contact', (req, res) => {
+    console.log('GET /contact');
+    res.render('contact', {title: 'Contact'});
+});
+
+// Respond to POST requests for contact
+app.post('/contact', (req, res) => {
+    console.log('POST /contact');
+    console.log(`name=${req.body.name}`);
+    console.log(`email=${req.body.email}`);
+    console.log(`message=${req.body.message}`);
+});
+
+
 
 app.listen(port);
 console.log(`Server running on port ${port}`);
