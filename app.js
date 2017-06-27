@@ -44,12 +44,45 @@ app.get('/contact', (req, res) => {
 // Respond to POST requests for contact
 app.post('/contact', (req, res) => {
     console.log('POST /contact');
-    console.log(`name=${req.body.name}`);
-    console.log(`email=${req.body.email}`);
-    console.log(`message=${req.body.message}`);
+
+    let name = req.body.name;
+    let email = req.body.email;
+    let message = req.body.message;
+
+    console.log(`name=${name}`);
+    console.log(`email=${email}`);
+    console.log(`message=${message}`);
+
+    // Send email with nodeMailer
+    let transporter = nodeMailer.createTransport({
+        host: 'my.smtp.host',           // TODO: Enter your SMTP host name here
+        port: 465,
+        secure: true,
+        auth: {
+            user: 'username@domain',    // TODO: Enter your email username here
+            pass: 'password'            // TODO: Enter your email password here
+        }
+    });
+
+    let mailOptions = {
+        from: `${name} \<${email}\>`,
+        to: 'username@domain',          // TODO: Enter recipient (yourself) email address here
+        subject: 'Website form contact',
+        text: message,
+        html: `<p>${message}</p>`
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log(`Message sent: ${info.response}`);
+        }
+
+        res.redirect('/');
+    });
+
 });
-
-
 
 app.listen(port);
 console.log(`Server running on port ${port}`);
